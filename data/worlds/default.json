@@ -1,0 +1,134 @@
+{
+  "world_name": "The Ashen Reach",
+  "player": {
+    "location": "tavern",
+    "inventory": ["old_key"],
+    "health": 100,
+    "known_facts": []
+  },
+  "locations": {
+    "tavern": {
+      "id": "tavern",
+      "name": "The Broken Flagon Tavern",
+      "description": "A dimly lit tavern that smells of sweat and wood smoke. Rough-hewn tables fill the room. A fire crackles in the hearth.",
+      "exits": {"north": "street", "upstairs": "room_21"},
+      "items": ["dagger", "wanted_notice"],
+      "npcs": ["barkeep"],
+      "visited": true
+    },
+    "street": {
+      "id": "street",
+      "name": "Cobblestone Street",
+      "description": "A narrow street slick with rain. Crooked buildings lean overhead. A fog hangs low.",
+      "exits": {"south": "tavern", "east": "market", "west": "alley"},
+      "items": [],
+      "npcs": [],
+      "visited": false
+    },
+    "room_21": {
+      "id": "room_21",
+      "name": "Room Twenty One",
+      "description": "A sparse lodging room. A straw mattress, a locked chest, and a window overlooking the street.",
+      "exits": {"downstairs": "tavern"},
+      "items": ["locked_chest"],
+      "npcs": [],
+      "visited": false
+    },
+    "market": {
+      "id": "market",
+      "name": "The Market Square",
+      "description": "A busy square with merchant stalls. Vendors hawk their wares. The smell of roasting meat fills the air.",
+      "exits": {"west": "street"},
+      "items": ["strange_coin"],
+      "npcs": ["merchant"],
+      "visited": false
+    },
+    "alley": {
+      "id": "alley",
+      "name": "Dead End Alley",
+      "description": "A dark alley that ends at a crumbling wall. Something scratched into the bricks catches your eye.",
+      "exits": {"east": "street"},
+      "items": ["scratched_message"],
+      "npcs": ["hooded_figure"],
+      "visited": false
+    }
+  },
+  "npcs": {
+    "barkeep": {
+      "id": "barkeep",
+      "name": "Marta the Barkeep",
+      "description": "A heavyset woman with sharp eyes and flour on her apron. She sees everything, says little.",
+      "location": "tavern",
+      "disposition": "neutral",
+      "alive": true,
+      "inventory": [],
+      "memories": []
+    },
+    "merchant": {
+      "id": "merchant",
+      "name": "Aldric the Merchant",
+      "description": "A nervous thin man who keeps glancing over his shoulder.",
+      "location": "market",
+      "disposition": "friendly",
+      "alive": true,
+      "inventory": ["silver_ring"],
+      "memories": []
+    },
+    "hooded_figure": {
+      "id": "hooded_figure",
+      "name": "The Hooded Figure",
+      "description": "A figure in a deep hood who stands very still.",
+      "location": "alley",
+      "disposition": "neutral",
+      "alive": true,
+      "inventory": [],
+      "memories": []
+    }
+  },
+  "items": {
+    "old_key": {
+      "id": "old_key",
+      "name": "Old Iron Key",
+      "description": "A heavy iron key, teeth worn smooth with age.",
+      "location": "inventory",
+      "properties": {"unlocks": "locked_chest"}
+    },
+    "dagger": {
+      "id": "dagger",
+      "name": "Rusty Dagger",
+      "description": "A short blade spotted with rust. Still sharp enough.",
+      "location": "tavern",
+      "properties": {"weapon": true, "damage": 5}
+    },
+    "wanted_notice": {
+      "id": "wanted_notice",
+      "name": "Wanted Notice",
+      "description": "A parchment notice. A face sketched in rough charcoal. A reward: 200 gold.",
+      "location": "tavern",
+      "properties": {"readable": true}
+    },
+    "locked_chest": {
+      "id": "locked_chest",
+      "name": "Locked Chest",
+      "description": "A heavy wooden chest with an iron lock.",
+      "location": "room_21",
+      "properties": {"locked": true, "unlocked_by": "old_key"}
+    },
+    "strange_coin": {
+      "id": "strange_coin",
+      "name": "Strange Coin",
+      "description": "A gold coin stamped with a face you do not recognise. It is warm to the touch.",
+      "location": "market",
+      "properties": {}
+    },
+    "scratched_message": {
+      "id": "scratched_message",
+      "name": "Scratched Message",
+      "description": "Words scratched into brick: 'THE KEY OPENS MORE THAN ONE DOOR'.",
+      "location": "alley",
+      "properties": {"readable": true, "reveals_fact": "the_chest_secret"}
+    }
+  },
+  "turn": 0,
+  "history": []
+}
