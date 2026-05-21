@@ -148,7 +148,7 @@ class WorldState:
         npc_lines = []
         for n in loc_npcs:
             status = "alive" if n.alive else "dead"
-            npc_lines.append(f"{n.name} ({n.disposition}, {status})")
+            npc_lines.append(f"{n.name} [id:{n.id}] ({n.disposition}, {status})")
         npcs_str = ", ".join(npc_lines) or "none"
 
         inv_str = ", ".join(i.name for i in player_items) or "nothing"
@@ -159,7 +159,7 @@ class WorldState:
             memory_lines = []
             for npc in loc_npcs:
                 if npc.alive:
-                    memory_lines.append(npc.memory_summary())
+                    memory_lines.append(f"[id:{npc.id}] {npc.memory_summary()}")
             if memory_lines:
                 memory_block = "\nNPC MEMORIES (what they remember about the player):\n"
                 memory_block += "\n".join(memory_lines)
@@ -267,7 +267,13 @@ class WorldState:
         state.turn = raw.get("turn", 0)
         state.history = raw.get("history", [])
         state.player = Player(**raw["player"])
-        state.locations = {k: Location(**v) for k, v in raw["locations"].items()}
+        state.locations = {}
+        for k, v in raw["locations"].items():
+            loc_data = dict(v)
+            loc_data.setdefault("visited", False)
+            loc_data.setdefault("items", [])
+            loc_data.setdefault("npcs", [])
+            state.locations[k] = Location(**loc_data)
         state.npcs = {}
         for k, v in raw["npcs"].items():
             npc_data = dict(v)

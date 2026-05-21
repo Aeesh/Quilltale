@@ -39,8 +39,11 @@ YOUR RULES:
      If the barkeep remembers the player stole from her, she is cold and watchful.
      If the merchant remembers being paid fairly, he offers a small discount.
    - Memory shapes tone, not just dialogue, so show it through behaviour.
+   - You MUST include npc_memory in state_update whenever an NPC is present and
+     any interaction occurred, even minor ones. Never omit it when NPCs are in the scene.
 
-3. Your response has two parts, always in this exact JSON structure:
+3. Your response has two parts: what the player sees (narration, image_prompt) and what the world records
+(state_update, scene_changed), always in this exact JSON structure:
 {
   "narration": "The story text the player reads. 2-4 sentences. Grounded in facts.",
   "state_update": {
@@ -158,11 +161,11 @@ class GameMasterAgent:
         """Generate the opening narration when a new game starts."""
         loc = state.current_location()
         prompt = f"""
-{state.to_context_summary()}
+              {state.to_context_summary()}
 
-Generate the opening narration for this adventure. Set the scene.
-Respond with JSON: {{"narration": "...", "image_prompt": "..."}}
-"""
+              Generate the opening narration for this adventure. Set the scene.
+              Respond with JSON: {{"narration": "...", "image_prompt": "..."}}
+              """
         try:
             raw = self._llm.generate_json(prompt, GM_SYSTEM)
             result = json.loads(raw)
