@@ -142,7 +142,7 @@ class WorldState:
             if lid in self.locations
         ) or "none"
 
-        items_str = ", ".join(i.name for i in loc_items) or "none"
+        items_str = ", ".join(f"{i.name} [id:{i.id}]" for i in loc_items) or "none"
 
         # NPC summary with disposition AND memory
         npc_lines = []
@@ -151,7 +151,7 @@ class WorldState:
             npc_lines.append(f"{n.name} [id:{n.id}] ({n.disposition}, {status})")
         npcs_str = ", ".join(npc_lines) or "none"
 
-        inv_str = ", ".join(i.name for i in player_items) or "nothing"
+        inv_str = ", ".join(f"{i.name} [id:{i.id}]" for i in player_items) or "nothing"
 
         # Build NPC memory block, only if NPCs are present
         memory_block = ""
