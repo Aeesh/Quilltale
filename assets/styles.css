@@ -1,0 +1,657 @@
+/* =============================================================
+   QUILLTALE — Stylesheet
+   Dark:  deep slate-navy with vivid teal + ember-gold accents
+   Light: blush parchment · dusty rose + warm taupe
+   ============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap');
+
+/* =============================================================
+   Design Tokens — Dark (default)
+   ============================================================= */
+:root {
+    /* Surfaces — deep slate navy */
+    --bg:            #0b0e14;
+    --bg-panel:      #111520;
+    --bg-raised:     #181e2e;
+    --bg-input:      #0d1018;
+    --bg-card:       #141929;
+
+    /* Text */
+    --ink:           #e2ddd6;
+    --ink-muted:     #8896b0;
+    --ink-faint:     #3d4a62;
+    --ink-on-raised: #ddd8d0;
+
+    /* Primary accent — electric teal */
+    --teal:          #2dd4bf;
+    --teal-glow:     rgba(45, 212, 191, 0.15);
+    --teal-glow-lg:  rgba(45, 212, 191, 0.06);
+
+    /* Secondary accent — ember gold */
+    --gold:          #f59e0b;
+    --gold-glow:     rgba(245, 158, 11, 0.18);
+
+    /* Borders */
+    --border:        rgba(45, 212, 191, 0.08);
+    --border-mid:    rgba(45, 212, 191, 0.2);
+    --border-hi:     rgba(45, 212, 191, 0.45);
+    --border-gold:   rgba(245, 158, 11, 0.22);
+
+    /* Shadows */
+    --shadow-md:     0 6px 32px rgba(0, 0, 0, 0.8);
+    --shadow-lg:     0 12px 60px rgba(0, 0, 0, 0.9);
+    --teal-halo:     0 0 40px rgba(45, 212, 191, 0.1);
+
+    /* Typography */
+    --font-display:  'Cinzel', serif;
+    --font-body:     'Crimson Pro', serif;
+    --font-mono:     'JetBrains Mono', monospace;
+
+    /* Layout */
+    --r-sm: 4px;
+    --r:    8px;
+    --r-lg: 14px;
+    --ease: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =============================================================
+   Light Mode — blush parchment palette
+   ============================================================= */
+body.light-mode {
+    --bg:            #f5eaed;
+    --bg-panel:      #ecdde1;
+    --bg-raised:     #e2cfD4;
+    --bg-input:      #f9f1f3;
+    --bg-card:       #eedfe3;
+
+    --ink:           #2a1519;
+    --ink-muted:     #6b454e;
+    --ink-faint:     #a87e87;
+    --ink-on-raised: #1e0f13;
+
+    --teal:          #7a4f58;
+    --teal-glow:     rgba(122, 79, 88, 0.12);
+    --teal-glow-lg:  rgba(122, 79, 88, 0.05);
+
+    --gold:          #b06030;
+    --gold-glow:     rgba(176, 96, 48, 0.14);
+
+    --border:        rgba(42, 21, 25, 0.09);
+    --border-mid:    rgba(42, 21, 25, 0.18);
+    --border-hi:     rgba(42, 21, 25, 0.32);
+    --border-gold:   rgba(176, 96, 48, 0.22);
+
+    --shadow-md:     0 6px 28px rgba(0, 0, 0, 0.09);
+    --shadow-lg:     0 12px 50px rgba(0, 0, 0, 0.13);
+    --teal-halo:     0 0 30px rgba(122, 79, 88, 0.08);
+}
+
+/* =============================================================
+   Reset & Base
+   ============================================================= */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html { height: 100%; scroll-behavior: smooth; }
+
+body,
+.gradio-container {
+    background: var(--bg) !important;
+    color: var(--ink) !important;
+    font-family: var(--font-body) !important;
+    font-size: 17px !important;
+    line-height: 1.8 !important;
+    min-height: 100vh;
+    transition: background 0.35s ease, color 0.35s ease !important;
+}
+
+.gradio-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 2rem 0rem !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* Dark ambient layers */
+body:not(.light-mode)::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0,0,0,0.04) 3px,
+        rgba(0,0,0,0.04) 4px
+    );
+}
+body:not(.light-mode)::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 60% 40% at 15% 20%, rgba(45,212,191,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 35% at 85% 75%, rgba(245,158,11,0.04) 0%, transparent 70%);
+}
+
+/* Light grain */
+body.light-mode::before {
+    content: '';
+     position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px;
+}
+
+footer, .footer, #footer { display: none !important; }
+
+* { scrollbar-width: thin; scrollbar-color: var(--border-hi) transparent; }
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 2px; }
+
+
+/* =============================================================
+   Top Bar
+   ============================================================= */
+.qt-topbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0rem !important;
+    border-bottom: 1px solid var(--border-mid) !important;
+    margin-bottom: 0 !important;
+    gap: 1rem !important;
+    position: relative !important;
+}
+
+/* Horizontal rule glow line */
+.qt-topbar::after {
+    content: '';
+    position: absolute; bottom: -1px; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--teal) 30%, var(--gold) 70%, transparent);
+    opacity: 0.45;
+}
+
+.qt-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.qt-rune {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--teal);
+    opacity: 0.65;
+}
+
+/* Brand name */
+.qt-brand-name {
+    font-family: var(--font-display) !important;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.1em !important;
+    color: var(--teal) !important;
+    text-shadow: 0 0 40px var(--teal-glow), 0 2px 0 rgba(0,0,0,0.5) !important;
+    animation: brandReveal 1.2s ease forwards;
+    background: none !important;
+    -webkit-text-fill-color: unset !important;
+}
+
+@keyframes brandReveal {
+    from { opacity: 0; letter-spacing: 0.35em; }
+    to   { opacity: 1; letter-spacing: 0.1em; }
+}
+
+/* Theme toggle */
+.qt-toggle-btn button {
+    background: var(--bg-raised) !important;
+    color: var(--teal) !important;
+    border: 1px solid var(--border-mid) !important;
+    border-radius: 30px !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.64rem !important;
+    letter-spacing: 0.14em !important;
+    padding: 0.4rem 1.2rem !important;
+    cursor: pointer !important;
+    transition: all var(--ease) !important;
+}
+.qt-toggle-btn button:hover {
+    background: var(--teal) !important;
+    color: var(--bg) !important;
+    border-color: var(--teal) !important;
+    box-shadow: 0 0 18px var(--teal-glow) !important;
+    transform: none !important;
+}
+
+
+/* =============================================================
+   Tagline
+   ============================================================= */
+.qt-tagline {
+    font-family: var(--font-body) !important;
+    font-style: italic !important;
+    font-size: 0.93rem !important;
+    font-weight: 300 !important;
+    color: var(--ink-muted) !important;
+    text-align: center !important;
+    letter-spacing: 0.05em !important;
+    padding: 0.9rem 0 0.4rem !important;
+    border-bottom: 1px solid var(--border) !important;
+    margin-bottom: 1.5rem !important;
+    animation: fadeIn 1.6s ease forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* =============================================================
+   Main layout
+   ============================================================= */
+.qt-main-row {
+    align-items: flex-start !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+}
+
+.qt-left-col,
+.qt-right-col {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.9rem !important;
+}
+
+.qt-right-col {
+    min-height: 0 !important;
+}
+
+
+/* =============================================================
+   Panel Labels
+   ============================================================= */
+.qt-panel-label,
+.qt-input-label {
+    font-family: var(--font-mono) !important;
+    font-size: 0.59rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.3em !important;
+    text-transform: uppercase !important;
+    color: var(--teal) !important;
+    padding: 0 0 0.5rem !important;
+    border-bottom: 1px solid var(--border-mid) !important;
+    margin-bottom: 0.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+.qt-panel-label::before,
+.qt-input-label::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 8px var(--teal);
+    animation: dotPulse 2.5s ease-in-out infinite;
+    flex-shrink: 0;
+}
+@keyframes dotPulse {
+    0%,100% { opacity:1; box-shadow: 0 0 8px var(--teal); }
+    50%      { opacity:0.35; box-shadow: 0 0 3px var(--teal); }
+}
+
+.qt-input-label {
+    margin-top: 0.75rem !important;
+    color: var(--gold) !important;
+}
+.qt-input-label::before {
+    background: var(--gold) !important;
+    box-shadow: 0 0 8px var(--gold) !important;
+}
+
+
+/* =============================================================
+   Scene Image
+   ============================================================= */
+.qt-scene {
+    background: var(--bg-panel) !important;
+    border: 1px solid var(--border-mid) !important;
+    border-radius: var(--r-lg) !important;
+    overflow: hidden !important;
+    box-shadow: var(--shadow-md), var(--teal-halo) !important;
+    transition: border-color var(--ease), box-shadow var(--ease) !important;
+    min-height: 280px;
+}
+.qt-scene:hover {
+    border-color: var(--border-hi) !important;
+    box-shadow: var(--shadow-lg), 0 0 55px rgba(45,212,191,0.16) !important;
+}
+.qt-scene img {
+    width: 100% !important;
+    display: block !important;
+    border-radius: 0 !important;
+    transition: transform 0.8s cubic-bezier(0.4,0,0.2,1) !important;
+}
+.qt-scene:hover img { transform: scale(1.025) !important; }
+
+.qt-scene .empty,
+.qt-scene .wrap,
+.qt-scene [data-testid="empty-img"] {
+    min-height: 280px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background:
+        radial-gradient(ellipse 60% 60% at 50% 50%, var(--teal-glow-lg) 0%, transparent 70%),
+        repeating-linear-gradient(0deg,  transparent 0, transparent 39px, var(--border) 39px, var(--border) 40px),
+        repeating-linear-gradient(90deg, transparent 0, transparent 39px, var(--border) 39px, var(--border) 40px),
+        var(--bg-panel) !important;
+}
+.qt-scene button,
+.qt-scene [data-testid="upload-button"],
+.qt-scene .icon-button-wrapper,
+.qt-scene .upload-btn,
+.qt-scene .toolbar-wrap { display: none !important; }
+
+
+/* World State accordion */
+.qt-accord {
+    background: var(--bg-panel) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--r) !important;
+    overflow: hidden !important;
+    transition: border-color var(--ease) !important;
+    max-height: 420px;
+}
+.qt-accord:hover { border-color: var(--border-mid) !important; }
+
+.qt-accord > .label-wrap > span,
+.qt-accord summary,
+.qt-accord button {
+    font-family: var(--font-mono) !important;
+    font-size: 0.57rem !important;
+    letter-spacing: 0.24em !important;
+    text-transform: uppercase !important;
+    color: var(--ink-muted) !important;
+    background: transparent !important;
+    padding: 0.7rem 1rem !important;
+    transition: color var(--ease) !important;
+}
+.qt-accord > .label-wrap > span:hover,
+.qt-accord summary:hover,
+.qt-accord button:hover { color: var(--teal) !important; }
+
+.qt-world-text textarea {
+    font-family: var(--font-mono) !important;
+    font-size: 11px !important;
+    line-height: 1.7 !important;
+    color: var(--ink-muted) !important;
+    background: var(--bg) !important;
+    border: none !important;
+    padding: 0.9rem 1rem !important;
+    resize: none !important;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+
+/* =============================================================
+   Restart button
+   ============================================================= */
+.qt-btn-new button {
+    background: transparent !important;
+    color: var(--teal) !important;
+    border: 1px solid var(--border-mid) !important;
+    border-radius: var(--r) !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.64rem !important;
+    letter-spacing: 0.18em !important;
+    padding: 0.75rem 1rem !important;
+    width: 100% !important;
+    transition: all var(--ease) !important;
+    cursor: pointer !important;
+}
+.qt-btn-new button:hover {
+    background: var(--teal) !important;
+    color: var(--bg) !important;
+    border-color: var(--teal) !important;
+    box-shadow: 0 0 22px var(--teal-glow) !important;
+    transform: none !important;
+}
+
+
+/* =============================================================
+   Chronicle (Chatbot)
+   ============================================================= */
+.qt-chronicle {
+    background: var(--bg-panel) !important;
+    border: 1px solid var(--border-mid) !important;
+    border-radius: var(--r-lg) !important;
+    box-shadow: var(--shadow-md) !important;
+    overflow: hidden !important;
+    height:280px !important;
+    min-height: 280px !important;
+    max-height: 280px !important;
+}
+
+.qt-chronicle > div,
+.qt-chronicle .wrap,
+.qt-chronicle .bot-row,
+.qt-chronicle .message-wrap,
+.qt-chronicle .messages,
+.qt-chronicle [data-testid="chatbot"],
+.qt-chronicle .chatbot {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* GM narration — teal left bar */
+
+.qt-chronicle .message.bot p,
+.qt-chronicle .message.bot,
+.qt-chronicle [data-testid="bot"] p,
+.qt-chronicle [data-testid="bot"],
+.qt-chronicle .bot p,
+.qt-chronicle .bot,
+.qt-chronicle .prose p,
+.qt-chronicle .prose {
+    color: var(--ink-on-raised) !important;
+    font-family: var(--font-body) !important;
+    font-size: 1.06rem !important;
+    font-weight: 300 !important;
+    line-height: 1.9 !important;
+}
+
+/* Bot bubble wrapper */
+.qt-chronicle .message.bot,
+.qt-chronicle [data-testid="bot"],
+.qt-chronicle .bot {
+    background: var(--bg-raised) !important;
+    border: none !important;
+    border-left: 3px solid var(--teal) !important;
+    border-radius: 0 var(--r) var(--r) 0 !important;
+    margin: 0.75rem 1rem 0.75rem 0.5rem !important;
+    padding: 0.8rem 1.2rem !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    animation: storyIn 0.4s ease forwards !important;
+}
+
+/* Player action */
+.qt-chronicle .message.user,
+.qt-chronicle [data-testid="user"],
+.qt-chronicle .user {
+    background: transparent !important;
+    border: none !important;
+    border-right: 3px solid var(--gold) !important;
+    border-radius: var(--r) 0 0 var(--r) !important;
+    margin: 0.5rem 0.5rem 0.5rem 3rem !important;
+    padding: 0.5rem 1.2rem 0.5rem 1rem !important;
+    font-family: var(--font-body) !important;
+    font-style: italic !important;
+    font-size: 0.95rem !important;
+    color: var(--gold) !important;
+    text-align: right !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    animation: actionIn 0.3s ease forwards !important;
+}
+/* Ensure user text color holds */
+.qt-chronicle .message.user p,
+.qt-chronicle [data-testid="user"] p,
+.qt-chronicle .user p {
+    color: var(--gold) !important;
+    font-family: var(--font-body) !important;
+    font-style: italic !important;
+}
+
+@keyframes storyIn  { from { opacity:0; transform:translateX(-8px); } to { opacity:1; transform:translateX(0); } }
+@keyframes actionIn { from { opacity:0; transform:translateX(8px);  } to { opacity:1; transform:translateX(0); } }
+
+
+/* =============================================================
+   Input Row
+   ============================================================= */
+.qt-input-row { gap: 0.75rem !important; align-items: flex-end !important; }
+
+.qt-action-box textarea {
+    background: var(--bg-input) !important;
+    border: 1px solid var(--border-mid) !important;
+    border-radius: var(--r) !important;
+    color: var(--ink) !important;
+    font-family: var(--font-body) !important;
+    font-size: 1.05rem !important;
+    line-height: 1.6 !important;
+    padding: 0.7rem 1.1rem !important;
+    resize: none !important;
+    transition: border-color var(--ease), box-shadow var(--ease) !important;
+}
+.qt-action-box textarea:focus {
+    border-color: var(--teal) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px var(--teal-glow) !important;
+}
+.qt-action-box textarea::placeholder {
+    color: var(--ink-faint) !important;
+    font-style: italic !important;
+}
+
+.qt-btn-act button {
+    background: var(--teal) !important;
+    color: var(--bg) !important;
+    border: none !important;
+    border-radius: var(--r) !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.22em !important;
+    min-height: 48px !important;
+    box-shadow: 0 4px 20px var(--teal-glow) !important;
+    transition: all var(--ease) !important;
+    cursor: pointer !important;
+    position: relative; overflow: hidden;
+}
+.qt-btn-act button:hover {
+    background: color-mix(in srgb, var(--teal) 80%, black) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 28px var(--teal-glow) !important;
+}
+.qt-btn-act button:active { transform: translateY(0) !important; }
+
+/* Shimmer */
+.qt-btn-act button::before {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
+    transition: left 0.5s ease;
+}
+.qt-btn-act button:hover::before { left: 160%; }
+
+
+/* =============================================================
+   Footer
+   ============================================================= */
+.qt-footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1.25rem !important;
+    margin-top: 3rem !important;
+    padding-top: 1.25rem !important;
+    border-top: 1px solid var(--border) !important;
+}
+.qt-footer-rule {
+    font-family: var(--font-mono);
+    color: var(--teal);
+    opacity: 0.28;
+    font-size: 0.63rem;
+    letter-spacing: 0.35em;
+}
+.qt-footer-text {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--ink-faint);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+
+/* =============================================================
+   Gradio internals cleanup
+   ============================================================= */
+.gradio-container .block,
+.gradio-container .form {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.gradio-container label > span:first-child:empty,
+.qt-chronicle ~ * label > span { display: none !important; }
+
+.gradio-container .gap,
+.gradio-container .row {
+    gap: 0.75rem !important;
+}
+
+.qt-accord svg { stroke: var(--ink-muted) !important; }
+
+.qt-chronicle .share-button,
+.qt-chronicle .copy-button,
+.qt-chronicle [aria-label="Share"],
+.qt-chronicle [aria-label="Copy"] {
+    opacity: 0.25 !important;
+    transition: opacity 0.2s !important;
+}
+.qt-chronicle:hover .share-button,
+.qt-chronicle:hover .copy-button { opacity: 0.6 !important; }
+
+
+/* =============================================================
+   Responsive
+   ============================================================= */
+@media (max-width: 900px) {
+    .gradio-container {
+        padding: 0 1rem 3rem !important;
+    }
+    .qt-main-row { flex-direction: column !important; }
+    .qt-brand-name { font-size: 1.6rem !important; }
+    .qt-chronicle { height: 380px !important; min-height: 380px !important; max-height: 380px !important; }
+}
