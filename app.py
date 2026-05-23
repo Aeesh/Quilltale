@@ -40,7 +40,7 @@ def start_game(world_state_json: str) -> tuple:
             pass
 
     chat_history = [{"role": "assistant", "content": narration}]
-    return chat_history, image, state.to_json(), state.to_context_summary()
+    return chat_history, image, state.to_json(), state.to_player_summary()
 
 
 def take_action(
@@ -71,7 +71,7 @@ def take_action(
         except Exception:
             pass
 
-    return chat_history, new_image, state.to_json(), state.to_context_summary()
+    return chat_history, new_image, state.to_json(), state.to_player_summary()
 
 
 ### Theme toggle
@@ -136,6 +136,7 @@ with gr.Blocks(title="Quilltale") as demo:
                 label="",
                 interactive=False,
                 show_label=False,
+                height=280,
                 elem_classes=["qt-scene"],
             )
 
@@ -167,18 +168,18 @@ with gr.Blocks(title="Quilltale") as demo:
             gr.HTML('<div class="qt-input-label">What happens next in your adventure?</div>')
             with gr.Row(elem_classes=["qt-input-row"]):
                 action_input = gr.Textbox(
-                    placeholder="Say what you want to do next... look around, talk to Marta, grab the dagger, head north...",
+                    placeholder="You are a stranger who has just arrived in a dark medieval city called The Ashen Reach. You wake up in a tavern with an old iron key in your pocket that you don't remember acquiring.Say what you want to do next... look around, talk to Marta, grab the dagger, head north...",
                     label="",
-                    scale=5,
+                    scale=6,
                     lines=1,
-                    max_lines=3,
+                    max_lines=5,
                     elem_classes=["qt-action-box"],
                 )
                 submit_btn = gr.Button(
                     "ACT",
                     variant="primary",
                     scale=1,
-                    min_width=80,
+                    min_width=50,
                     elem_classes=["qt-btn-act"],
                 )
 
@@ -233,3 +234,4 @@ if __name__ == "__main__":
     demo.launch(
         css_paths=Path("assets/styles.css"),
     )
+
