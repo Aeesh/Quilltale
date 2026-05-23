@@ -170,8 +170,8 @@ with gr.Blocks(title="Quilltale") as demo:
                 action_input = gr.Textbox(
                     placeholder="You are a stranger who has just arrived in a dark medieval city called The Ashen Reach. You wake up in a tavern with an old iron key in your pocket that you don't remember acquiring.Say what you want to do next... look around, talk to Marta, grab the dagger, head north...",
                     label="",
-                    scale=6,
-                    lines=1,
+                    scale=5,
+                    lines=3,
                     max_lines=5,
                     elem_classes=["qt-action-box"],
                 )
