@@ -233,5 +233,7 @@ with gr.Blocks(title="Quilltale") as demo:
 if __name__ == "__main__":
     demo.launch(
         css_paths=Path("assets/styles.css"),
+        server_name="0.0.0.0",
+        server_port=7860,
     )
 
