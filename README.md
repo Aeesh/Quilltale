@@ -6,6 +6,13 @@ colorTo: gray
 sdk: gradio
 sdk_version: 6.14.0
 app_file: app.py
+tags:
+  - storytelling
+  - game
+  - llm
+  - ai-agents
+  - rpg
+  - memory
 ---
 # Quilltale
 
