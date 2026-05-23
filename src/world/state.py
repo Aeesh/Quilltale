@@ -174,6 +174,50 @@ class WorldState:
                 Player inventory: {inv_str}{memory_block}
                 """
 
+
+    def to_player_summary(self) -> str:
+        """
+        Snapshot for the UI.
+        """
+        loc = self.current_location()
+        if not loc:
+            return "Location unknown."
+
+        loc_items = self.items_in_location(self.player.location)
+        loc_npcs = self.npcs_in_location(self.player.location)
+        player_items = self.player_inventory_items()
+
+        exits = ", ".join(
+            f"{d} to {self.locations[lid].name}"
+            for d, lid in loc.exits.items()
+            if lid in self.locations
+        ) or "none"
+
+        items = ", ".join(i.name for i in loc_items) or "nothing"
+        npcs = ", ".join(
+            f"{n.name} ({n.disposition})"
+            for n in loc_npcs if n.alive
+        ) or "nobody"
+        carrying = ", ".join(i.name for i in player_items) or "nothing"
+
+        facts = ""
+        if self.player.known_facts:
+            facts = "\n\nThings you know:\n" + "\n".join(
+                f"  {f}" for f in self.player.known_facts
+            )
+
+        return (
+            f"Turn {self.turn}\n\n"
+            f"You are in {loc.name}.\n"
+            f"{loc.description}\n\n"
+            f"You can go: {exits}\n"
+            f"You can see: {items}\n"
+            f"Present: {npcs}\n"
+            f"You are carrying: {carrying}"
+            f"{facts}"
+        )
+
+
     def apply_update(self, update: dict) -> list[str]:
         """
         Apply a structured update from the GM agent.
