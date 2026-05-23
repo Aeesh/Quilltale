@@ -198,6 +198,14 @@ class WorldState:
             f"{n.name} ({n.disposition})"
             for n in loc_npcs if n.alive
         ) or "nobody"
+
+        visited = [
+            loc.name for loc_id, loc in self.locations.items()
+            if loc.visited and loc_id != self.player.location
+        ]
+
+        visited_str = ", ".join(visited) if visited else "nowhere yet"
+
         carrying = ", ".join(i.name for i in player_items) or "nothing"
 
         facts = ""
@@ -213,9 +221,31 @@ class WorldState:
             f"You can go: {exits}\n"
             f"You can see: {items}\n"
             f"Present: {npcs}\n"
+            f"You have visited: {visited_str}\n"
             f"You are carrying: {carrying}"
             f"{facts}"
         )
+
+
+    def to_map_summary(self) -> str:
+        """
+        Map of visited locations only, for GM route planning.
+        Unvisited locations stay hidden until the player discovers them.
+        """
+        lines = ["KNOWN MAP (locations the player has visited):"]
+        for loc_id, loc in self.locations.items():
+            if not loc.visited:
+                continue
+            exits = ", ".join(
+                f"{direction} → {self.locations[lid].name}"
+                for direction, lid in loc.exits.items()
+                if lid in self.locations
+            ) or "no exits"
+            lines.append(f"  {loc.name}: {exits}")
+
+        if len(lines) == 1:
+            return "KNOWN MAP: nowhere explored yet beyond current location."
+        return "\n".join(lines)
 
 
     def apply_update(self, update: dict) -> list[str]:
@@ -229,14 +259,20 @@ class WorldState:
         # Player movement
         if "move_player" in update:
             dest = update["move_player"]
-            loc = self.current_location()
-            if dest in loc.exits and loc.exits[dest] in self.locations:
-                new_loc_id = loc.exits[dest]
-                self.player.location = new_loc_id
-                self.locations[new_loc_id].visited = True
-                changes.append(f"Player moved to {self.locations[new_loc_id].name}")
-            else:
-                changes.append(f"REJECTED move to {dest} — not a valid exit")
+
+            # Normalise to list to handle both single direction and multi-step
+            directions = dest if isinstance(dest, list) else [dest]
+
+            for direction in directions:
+                loc = self.current_location()
+                if direction in loc.exits and loc.exits[direction] in self.locations:
+                    new_loc_id = loc.exits[direction]
+                    self.player.location = new_loc_id
+                    self.locations[new_loc_id].visited = True
+                    changes.append(f"Player moved to {self.locations[new_loc_id].name}")
+                else:
+                    changes.append(f"REJECTED move to {direction} — not a valid exit")
+                    break
 
         # Item pickup
         if "pickup_item" in update:

@@ -47,7 +47,7 @@ YOUR RULES:
 {
   "narration": "The story text the player reads. 2-4 sentences. Grounded in facts.",
   "state_update": {
-    "move_player": "direction (only if player explicitly tried to move)",
+    "move_player": "direction OR list of directions for multi-step movement e.g. ['downstairs', 'north']",
     "pickup_item": "item_id (only if player explicitly picked it up)",
     "drop_item": "item_id (only if player explicitly dropped it)",
     "npc_state": {"npc_id": {"alive": bool, "disposition": "friendly|neutral|hostile"}},
@@ -83,10 +83,20 @@ YOUR RULES:
 8. Write narration in second person. Keep it atmospheric, specific, and short.
    Let NPC behaviour reflect their memories, do not explain why they act that way,
    just show it.
+
+9. If the player wants to reach a location that requires multiple steps,
+   provide the full path as a list in move_player: ['downstairs', 'north'].
+   The narration should describe the full journey.
+   The final world state must reflect where the player actually ends up.
+   Never use a direction that is not listed in the current location's exits.
+   Plan each step: from room_21 the only exit is downstairs to tavern,
+   from tavern north leads to street. So room_21 to street = ['downstairs', 'north'].
 """
 
 GM_PROMPT = """
 {world_context}
+
+{map_context}
 
 RECENT HISTORY:
 {history}
@@ -114,6 +124,7 @@ class GameMasterAgent:
 
         prompt = GM_PROMPT.format(
             world_context=state.to_context_summary(),
+            map_context=state.to_map_summary(),
             history=history_str,
             action=action,
         )
