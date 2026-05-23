@@ -263,6 +263,27 @@ class WorldState:
             # Normalise to list to handle both single direction and multi-step
             directions = dest if isinstance(dest, list) else [dest]
 
+            # For multi-step paths, check if final destination is visited
+            # If not visited, truncate to single step only
+            if len(directions) > 1:
+                # Simulate the path to find the final location
+                simulated_loc = self.player.location
+                valid_directions = []
+                for direction in directions:
+                    loc = self.locations.get(simulated_loc)
+                    if loc and direction in loc.exits and loc.exits[direction] in self.locations:
+                        next_loc_id = loc.exits[direction]
+                        next_loc = self.locations[next_loc_id]
+                        if not next_loc.visited and next_loc_id != self.player.location:
+                            # Unvisited destination — stop path here, take only this one step
+                            valid_directions.append(direction)
+                            break
+                        valid_directions.append(direction)
+                        simulated_loc = next_loc_id
+                    else:
+                        break
+                directions = valid_directions if valid_directions else directions[:1]
+
             for direction in directions:
                 loc = self.current_location()
                 if direction in loc.exits and loc.exits[direction] in self.locations:

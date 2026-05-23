@@ -91,6 +91,12 @@ YOUR RULES:
    Never use a direction that is not listed in the current location's exits.
    Plan each step: from room_21 the only exit is downstairs to tavern,
    from tavern north leads to street. So room_21 to street = ['downstairs', 'north'].
+
+10. Multi-step movement is only allowed to locations the player has already visited.
+   These are shown in KNOWN MAP.
+   If the destination is not in KNOWN MAP, move one step at a time toward it
+   using only exits visible in the current location.
+   Never guess directions to unvisited locations.
 """
 
 GM_PROMPT = """
