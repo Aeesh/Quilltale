@@ -1,0 +1,67 @@
+QUILLTALE — EVALUATION REPORT
+============================================================
+
+Scenario:  default
+Timestamp: 2026-05-23T16:24:24.402427
+Turns:     20
+
+METRICS
+----------------------------------------
+Invalid transition rate:    12.5%  (1/8 transitions rejected)
+Memory utilisation rate:    76.9%  (10/13 turns with NPCs reflected memory)
+Factual consistency rate:   85.0%  (17/20 turns without contradictions)
+
+REJECTED TRANSITIONS (sample)
+----------------------------------------
+  REJECTED pickup dagger — not in current location
+
+MEMORY UTILISATION FAILURES (3 turns)
+----------------------------------------
+  Turn 6: ask Marta about the chest upstairs
+  Narration: Marta abruptly stops cleaning, the sound of her rag against the wood ceasing with a harsh, dry frict...
+  Reason: Judge call failed.
+
+  Turn 11: go north to the street
+  Narration: You turn your back on the tense, stifling atmosphere of the tavern and push through the heavy oak do...
+  Reason: The narration focuses entirely on the environment and the player's exit, failing to incorporate Marta's perception of the player as a dangerous, wanted criminal.
+
+  Turn 15: go back to the tavern
+  Narration: You turn away from the merchant and retrace your steps along the slick cobblestones. The wind howls ...
+  Reason: The narration focuses entirely on the player leaving the scene, meaning the merchant is no longer present or interacting with the player to reflect any past wariness.
+
+CONSISTENCY VIOLATIONS (3 turns)
+----------------------------------------
+  Turn 6: ask Marta about the chest upstairs
+  Narration: Marta abruptly stops cleaning, the sound of her rag against the wood ceasing with a harsh, dry frict...
+  Violation: The narration introduces an 'iron cleaver' in Marta's possession, which is not listed in the world state items, and references the player having a room, which is not established in the current inventory or world state (the player only has a key for Room Twenty One, but does not explicitly possess a room).
+
+  Turn 14: ask Aldric about the strange coin
+  Narration: Aldric the Merchant eyes the strange coin in your hand with a sharp, guarded look, his hands retreat...
+  Violation: The narration describes the player holding the 'Strange Coin', but the facts state the coin is located in the Market Square, not in the player's inventory. Additionally, the narration mentions a 'gale', while the world state describes the location as a busy square with no mention of weather conditions.
+
+  Turn 15: go back to the tavern
+  Narration: You turn away from the merchant and retrace your steps along the slick cobblestones. The wind howls ...
+  Violation: The current location is the Market Square, which only has an exit to the west (Cobblestone Street). The narration describes moving to a location (The Broken Flagon) that is not accessible from the current location, and the player is currently at the Market Square, not on a narrow lane leading to a tavern.
+
+TURN-BY-TURN SUMMARY
+----------------------------------------
+  ✓ T01 look around the tavern carefully              [con:✓]
+  ✓ T02 examine the wanted notice on the wall         [mem:✓] [con:✓]
+  ✓ T03 examine the rusty dagger on the table         [mem:✓] [con:✓]
+  ✓ T04 talk to Marta the barkeep                     [mem:✓] [con:✓]
+  ✓ T05 ask Marta about the dagger                    [mem:✓] [con:✓]
+  ✓ T06 ask Marta about the chest upstairs            [mem:✗] [con:✗]
+  ✓ T07 threaten Marta to tell you what she knows     [mem:✓] [con:✓]
+  ✗ T08 pick up the dagger                            [mem:✓] [con:✓]
+  ✓ T09 pick up the wanted notice                     [mem:✓] [con:✓]
+  ✓ T10 pick up the strange coin                      [mem:✓] [con:✓]
+  ✓ T11 go north to the street                        [mem:✗] [con:✓]
+  ✓ T12 go east to the market                         [con:✓]
+  ✓ T13 talk to Aldric the merchant                   [con:✓]
+  ✓ T14 ask Aldric about the strange coin             [con:✗]
+  ✓ T15 go back to the tavern                         [mem:✗] [con:✗]
+  ✓ T16 talk to Marta                                 [mem:✓] [con:✓]
+  ✓ T17 go upstairs to my room                        [mem:✓] [con:✓]
+  ✓ T18 examine the locked chest                      [con:✓]
+  ✓ T19 use the old iron key on the chest             [con:✓]
+  ✓ T20 go south                                      [con:✓]

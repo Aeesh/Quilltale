@@ -1,0 +1,63 @@
+QUILLTALE — EVALUATION REPORT
+============================================================
+
+Scenario:  default
+Timestamp: 2026-05-23T16:05:13.338170
+Turns:     20
+
+METRICS
+----------------------------------------
+Invalid transition rate:    11.1%  (1/9 transitions rejected)
+Memory utilisation rate:    84.6%  (11/13 turns with NPCs reflected memory)
+Factual consistency rate:   85.0%  (17/20 turns without contradictions)
+
+REJECTED TRANSITIONS (sample)
+----------------------------------------
+  REJECTED pickup dagger — not in current location
+
+MEMORY UTILISATION FAILURES (2 turns)
+----------------------------------------
+  Turn 6: ask Marta about the chest upstairs
+  Narration: Marta freezes mid-pour, the ale spilling slightly over the side of the mug as she hears your questio...
+  Reason: Judge call failed.
+
+  Turn 15: go back to the tavern
+  Narration: You turn away from the merchant's stall and backtrack through the cooling night air of the market. Y...
+  Reason: The narration describes the player's movement away from the market and does not feature Aldric the Merchant or any reaction from him.
+
+CONSISTENCY VIOLATIONS (3 turns)
+----------------------------------------
+  Turn 2: examine the wanted notice on the wall
+  Narration: You approach the support beam, your boots crunching on sawdust. The wanted notice features a sketch ...
+  Violation: The narration introduces an 'iron club' held by Marta the Barkeep, which is not listed in the world state items or the NPC's equipment.
+
+  Turn 8: pick up the dagger
+  Narration: You reach for the dagger lying on the scarred table, your fingers closing around the cold, pitted ir...
+  Violation: The narration states the player reaches for a dagger 'lying on the scarred table', but the player's inventory already contains the Rusty Dagger [id:dagger] and it is not listed as an item at the current location.
+
+  Turn 15: go back to the tavern
+  Narration: You turn away from the merchant's stall and backtrack through the cooling night air of the market. Y...
+  Violation: The narration describes moving west to the Broken Flagon Tavern, but the current location is the Market Square, and the only exit west is listed as 'Cobblestone Street', not a tavern.
+
+TURN-BY-TURN SUMMARY
+----------------------------------------
+  ✓ T01 look around the tavern carefully              [con:✓]
+  ✓ T02 examine the wanted notice on the wall         [mem:✓] [con:✗]
+  ✓ T03 examine the rusty dagger on the table         [mem:✓] [con:✓]
+  ✓ T04 talk to Marta the barkeep                     [mem:✓] [con:✓]
+  ✓ T05 ask Marta about the dagger                    [mem:✓] [con:✓]
+  ✓ T06 ask Marta about the chest upstairs            [mem:✗] [con:✓]
+  ✓ T07 threaten Marta to tell you what she knows     [mem:✓] [con:✓]
+  ✗ T08 pick up the dagger                            [mem:✓] [con:✗]
+  ✓ T09 pick up the wanted notice                     [mem:✓] [con:✓]
+  ✓ T10 pick up the strange coin                      [mem:✓] [con:✓]
+  ✓ T11 go north to the street                        [mem:✓] [con:✓]
+  ✓ T12 go east to the market                         [con:✓]
+  ✓ T13 talk to Aldric the merchant                   [con:✓]
+  ✓ T14 ask Aldric about the strange coin             [con:✓]
+  ✓ T15 go back to the tavern                         [mem:✗] [con:✗]
+  ✓ T16 talk to Marta                                 [mem:✓] [con:✓]
+  ✓ T17 go upstairs to my room                        [mem:✓] [con:✓]
+  ✓ T18 examine the locked chest                      [con:✓]
+  ✓ T19 use the old iron key on the chest             [con:✓]
+  ✓ T20 go south                                      [con:✓]

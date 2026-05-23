@@ -1,0 +1,629 @@
+{
+  "scenario_name": "default",
+  "total_turns": 20,
+  "timestamp": "2026-05-23T16:05:13.338170",
+  "total_transitions_attempted": 9,
+  "total_transitions_rejected": 1,
+  "total_turns_with_npcs": 0,
+  "total_turns_memory_reflected": 11,
+  "total_turns_memory_judged": 13,
+  "total_turns_consistent": 17,
+  "total_turns_consistency_judged": 20,
+  "invalid_transition_rate": 0.111,
+  "memory_utilisation_rate": 0.846,
+  "factual_consistency_rate": 0.85,
+  "turns": [
+    {
+      "turn": 1,
+      "action": "look around the tavern carefully",
+      "narration": "You scan the dimly lit room, the scent of damp wool and stale ale heavy in the air. Marta the Barkeep eyes you from behind the scarred counter, her hand resting near a heavy iron club. A rusty dagger lies abandoned on a nearby table, and a tattered, rain-streaked wanted notice is pinned to the wooden support beam.",
+      "state_update": {
+        "npc_memory": {
+          "barkeep": {
+            "description": "The stranger is lingering and observing the surroundings with keen interest.",
+            "emotional_tone": "wary",
+            "significance": 1
+          }
+        }
+      },
+      "changes_applied": [
+        "Marta the Barkeep remembers: 'The stranger is lingering and observing the surroundings with keen interest.' [wary, significance 1]"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {},
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [
+        "Marta the Barkeep"
+      ],
+      "npc_memories_present": false
+    },
+    {
+      "turn": 2,
+      "action": "examine the wanted notice on the wall",
+      "narration": "You approach the support beam, your boots crunching on sawdust. The wanted notice features a sketch of a man with a jagged scar across his cheek, but as Marta watches you, her grip on the iron club tightens, her eyes narrowed in a cold, silent assessment.",
+      "state_update": {
+        "npc_memory": {
+          "barkeep": {
+            "description": "The stranger is fixating on the wanted notice, making Marta wonder if he has something to hide.",
+            "emotional_tone": "suspicious",
+            "significance": 1
+          }
+        },
+        "add_fact": "The wanted notice depicts a man with a jagged scar across his cheek."
+      },
+      "changes_applied": [
+        "Marta the Barkeep remembers: 'The stranger is fixating on the wanted notice, making Marta wonder if he has something to hide.' [suspicious, significance 1]",
+        "Fact learned: The wanted notice depicts a man with a jagged scar across his cheek."
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {
+        "reflects_memory": true,
+        "confidence": 1.0,
+        "reason": "The narration directly incorporates Marta's suspicious observation of the player's interest in the wanted notice and translates her internal wariness into the physical action of tightening her grip on a weapon."
+      },
+      "consistency_judgement": {
+        "is_consistent": false,
+        "confidence": 1.0,
+        "violation": "The narration introduces an 'iron club' held by Marta the Barkeep, which is not listed in the world state items or the NPC's equipment."
+      },
+      "npcs_present": [
+        "Marta the Barkeep"
+      ],
+      "npc_memories_present": true
+    },
+    {
+      "turn": 3,
+      "action": "examine the rusty dagger on the table",
+      "narration": "You step away from the beam and pick up the rusty dagger from the scarred wood of the table. Its blade is pitted with age, but the hilt feels solid enough in your grip. Marta tracks your movement with narrowed eyes, her knuckles white as she maintains her grip on the iron club under the counter.",
+      "state_update": {
+        "pickup_item": "dagger",
+        "npc_memory": {
+          "barkeep": {
+            "description": "The stranger armed himself with a weapon, increasing her suspicion and unease.",
+            "emotional_tone": "suspicious",
+            "significance": 2
+          }
+        }
+      },
+      "changes_applied": [
+        "Player picked up Rusty Dagger",
+        "Marta the Barkeep remembers: 'The stranger armed himself with a weapon, increasing her suspicion and unease.' [suspicious, significance 2]"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {
+        "reflects_memory": true,
+        "confidence": 1.0,
+        "reason": "The narration explicitly shows Marta reacting to the player picking up the dagger by tracking them with narrowed eyes and preparing her own hidden weapon, directly reflecting her escalating suspicion recorded in turn 2."
+      },
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [
+        "Marta the Barkeep"
+      ],
+      "npc_memories_present": true
+    },
+    {
+      "turn": 4,
+      "action": "talk to Marta the barkeep",
+      "narration": "You approach the counter, the floorboards groaning under your weight. Marta doesn't smile; she keeps her hand firmly on the club beneath the bar, her gaze fixed sharply on the dagger now tucked into your belt. 'Keep your hands where I can see them,' she says, her voice low and tight with unspoken accusations.",
+      "state_update": {
+        "npc_memory": {
+          "barkeep": {
+            "description": "The stranger approached the counter while armed, confirming her worst suspicions about his intentions.",
+            "emotional_tone": "suspicious",
+            "significance": 2
+          }
+        }
+      },
+      "changes_applied": [
+        "Marta the Barkeep remembers: 'The stranger approached the counter while armed, confirming her worst suspicions about his intentions.' [suspicious, significance 2]"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {
+        "reflects_memory": true,
+        "confidence": 1.0,
+        "reason": "The narrator explicitly incorporates Marta's knowledge of the player's weapon and her resulting suspicion by having her arm herself and demand the player show their hands."
+      },
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [
+        "Marta the Barkeep"
+      ],
+      "npc_memories_present": true
+    },
+    {
+      "turn": 5,
+      "action": "ask Marta about the dagger",
+      "narration": "Marta doesn't blink, her gaze locking onto yours with an intensity that makes the air in the room feel heavy. 'That piece of junk has seen more blood than you'd like to admit,' she rasps, her fingers tapping rhythmically against the wooden bar near her hidden club. She refuses to elaborate, turning her back to pull a fresh pint, signaling that the conversation is over.",
+      "state_update": {
+        "npc_memory": {
+          "barkeep": {
+            "description": "The stranger questioned the origin of the weapon he stole, raising even more red flags about his criminal history.",
+            "emotional_tone": "suspicious",
+            "significance": 2
+          }
+        },
+        "add_fact": "Marta believes the rusty dagger has a violent history."
+      },
+      "changes_applied": [
+        "Marta the Barkeep remembers: 'The stranger questioned the origin of the weapon he stole, raising even more red flags about his criminal history.' [suspicious, significance 2]",
+        "Fact learned: Marta believes the rusty dagger has a violent history."
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {
+        "reflects_memory": true,
+        "confidence": 0.95,
+        "reason": "Marta's intense, guarded behavior and her specific comment about the weapon being bloodied directly reflect her established suspicion and wariness regarding the player's possession of the stolen item."
+      },
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [
+        "Marta the Barkeep"
+      ],
+      "npc_memories_present": true
+    },
+    {
+      "turn": 6,
+      "action": "ask Marta about the chest upstairs",
+      "narration": "Marta freezes mid-pour, the ale spilling slightly over the side of the mug as she hears your question. She slams the glass onto the counter with a heavy thud, her eyes narrowing into dangerous slits. 'Don't you go poking your nose into things that don't concern you, stranger,' she growls, pointedly glancing at your dagger before turning her back on you completely.",
+      "state_update": {
+        "npc_memory": {
+          "barkeep": {
+            "description": "The stranger is prying into the room upstairs, confirming he is a threat to the tavern's safety.",
+            "emotional_tone": "suspicious",
+            "significance": 2
+          }
+        }
+      },
+      "changes_applied": [
+        "Marta the Barkeep remembers: 'The stranger is prying into the room upstairs, confirming he is a threat to the tavern's safety.' [suspicious, significance 2]"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {
+        "reflects_memory": false,
+        "confidence": 0.0,
+        "reason": "Judge call failed."
+      },
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 0.0,
+        "violation": "Judge call failed."
+      },
+      "npcs_present": [
+        "Marta the Barkeep"
+      ],
+      "npc_memories_present": true
+    },
+    {
+      "turn": 7,
+      "action": "threaten Marta to tell you what she knows",
+      "narration": "You grip the hilt of your dagger, taking a menacing step toward the counter. Marta doesn't retreat; instead, she draws the heavy iron club from beneath the bar with lightning speed, leveling it at your chest with a steady hand. The tavern falls deathly silent as she stares you down, her voice a cold, sharp whisper, 'Try it, and you won't live to regret it.'",
+      "state_update": {
+        "npc_state": {
+          "barkeep": {
+            "alive": true,
+            "disposition": "hostile"
+          }
+        },
+        "npc_memory": {
+          "barkeep": {
+            "description": "The stranger openly threatened her life with a weapon, confirming he is a dangerous criminal who must be dealt with.",
+            "emotional_tone": "angry",
+            "significance": 3
+          }
+        }
+      },
+      "changes_applied": [
+        "NPC Marta the Barkeep state updated: {'alive': True, 'disposition': 'hostile'}",
+        "Marta the Barkeep remembers: 'The stranger openly threatened her life with a weapon, confirming he is a dangerous criminal who must be dealt with.' [angry, significance 3]"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {
+        "reflects_memory": true,
+        "confidence": 1.0,
+        "reason": "Marta's cold, aggressive, and preemptive defense directly reflects her established belief that the player is a dangerous criminal who must be dealt with."
+      },
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [
+        "Marta the Barkeep"
+      ],
+      "npc_memories_present": true
+    },
+    {
+      "turn": 8,
+      "action": "pick up the dagger",
+      "narration": "You reach for the dagger lying on the scarred table, your fingers closing around the cold, pitted iron. Marta watches your every movement, her iron club poised and heavy in the air, her face a mask of stone-cold defiance. The tavern remains suffocatingly silent as you secure the weapon at your hip.",
+      "state_update": {
+        "pickup_item": "dagger",
+        "npc_memory": {
+          "barkeep": {
+            "description": "The stranger ignored my warning and reclaimed his weapon, signaling he is ready to draw blood.",
+            "emotional_tone": "hostile",
+            "significance": 3
+          }
+        }
+      },
+      "changes_applied": [
+        "REJECTED pickup dagger \u2014 not in current location",
+        "Marta the Barkeep remembers: 'The stranger ignored my warning and reclaimed his weapon, signaling he is ready to draw blood.' [hostile, significance 3]"
+      ],
+      "rejected_transitions": [
+        "REJECTED pickup dagger \u2014 not in current location"
+      ],
+      "memory_judgement": {
+        "reflects_memory": true,
+        "confidence": 1.0,
+        "reason": "Marta's poised weapon and stone-cold expression directly mirror her recorded perception of the player as a dangerous threat and her hostile state from previous turns."
+      },
+      "consistency_judgement": {
+        "is_consistent": false,
+        "confidence": 1.0,
+        "violation": "The narration states the player reaches for a dagger 'lying on the scarred table', but the player's inventory already contains the Rusty Dagger [id:dagger] and it is not listed as an item at the current location."
+      },
+      "npcs_present": [
+        "Marta the Barkeep"
+      ],
+      "npc_memories_present": true
+    },
+    {
+      "turn": 9,
+      "action": "pick up the wanted notice",
+      "narration": "Your fingers brush the grime-crusted parchment of the Wanted Notice pinned to the wall. Marta's eyes track your hand with predatory precision, her knuckles white as she grips the iron club, but she remains rooted behind the bar. You pull the paper free, the sound of tearing fiber loud in the heavy, smoke-filled air.",
+      "state_update": {
+        "pickup_item": "wanted_notice",
+        "npc_memory": {
+          "barkeep": {
+            "description": "The stranger has now confiscated the wanted notice, further proving he has no respect for the law or my establishment.",
+            "emotional_tone": "suspicious",
+            "significance": 1
+          }
+        }
+      },
+      "changes_applied": [
+        "Player picked up Wanted Notice",
+        "Marta the Barkeep remembers: 'The stranger has now confiscated the wanted notice, further proving he has no respect for the law or my establishment.' [suspicious, significance 1]"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {
+        "reflects_memory": true,
+        "confidence": 1.0,
+        "reason": "Marta's behavior of gripping an iron club and tracking the player with 'predatory precision' directly mirrors the established memories of her viewing the player as a dangerous, hostile threat."
+      },
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [
+        "Marta the Barkeep"
+      ],
+      "npc_memories_present": true
+    },
+    {
+      "turn": 10,
+      "action": "pick up the strange coin",
+      "narration": "You scan the tavern floor and bar, but your eyes find only the flickering shadows cast by the hearth. There is no strange coin to be found in the grime of the Broken Flagon. Marta watches you search, her iron club still leveled, her breath hitching with a mix of anticipation and warning.",
+      "state_update": {
+        "npc_memory": {
+          "barkeep": {
+            "description": "The stranger searched the premises for an item that didn't exist, looking foolish and desperate.",
+            "emotional_tone": "amused",
+            "significance": 1
+          }
+        }
+      },
+      "changes_applied": [
+        "Marta the Barkeep remembers: 'The stranger searched the premises for an item that didn't exist, looking foolish and desperate.' [amused, significance 1]"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {
+        "reflects_memory": true,
+        "confidence": 1.0,
+        "reason": "Marta's posture of leveling an iron club at the player while exhibiting anticipation and warning directly reflects her established memory of the player as a dangerous, hostile threat."
+      },
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [
+        "Marta the Barkeep"
+      ],
+      "npc_memories_present": true
+    },
+    {
+      "turn": 11,
+      "action": "go north to the street",
+      "narration": "You turn your back on the barkeep's steady, lethal gaze and head toward the tavern door. As you step out into the cold night air, the heavy wooden door creaks shut behind you, cutting off the warmth and the tension of the room. You emerge onto the cobblestones, relieved to be out from under Marta's watchful eyes.",
+      "state_update": {
+        "move_player": "north"
+      },
+      "changes_applied": [
+        "Player moved to Cobblestone Street"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {
+        "reflects_memory": true,
+        "confidence": 0.8,
+        "reason": "The description of Marta's gaze as 'lethal' and the player's relief to be out from under her 'watchful eyes' directly captures the hostility and suspicion established in the memory logs."
+      },
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [
+        "Marta the Barkeep"
+      ],
+      "npc_memories_present": true
+    },
+    {
+      "turn": 12,
+      "action": "go east to the market",
+      "narration": "You turn from the tavern door and walk east toward the center of the district. The street widens into an open square, where rows of empty wooden stalls stand like skeletal ribcages under the dim, flickering glow of a single hanging lantern.",
+      "state_update": {
+        "move_player": "east"
+      },
+      "changes_applied": [
+        "Player moved to The Market Square"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {},
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 0.0,
+        "violation": "Judge call failed."
+      },
+      "npcs_present": [],
+      "npc_memories_present": false
+    },
+    {
+      "turn": 13,
+      "action": "talk to Aldric the merchant",
+      "narration": "Something shifts in the air, but you cannot tell what.",
+      "state_update": {},
+      "changes_applied": [],
+      "rejected_transitions": [],
+      "memory_judgement": {},
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [
+        "Aldric the Merchant"
+      ],
+      "npc_memories_present": false
+    },
+    {
+      "turn": 14,
+      "action": "ask Aldric about the strange coin",
+      "narration": "You approach the merchant's stall and hold up the coin, its surface cool and strangely textured against your palm. Aldric leans forward, his eyes narrowing as he studies the object with a mixture of professional curiosity and sudden, guarded wariness.",
+      "state_update": {
+        "npc_memory": {
+          "merchant": {
+            "description": "The stranger showed me a coin of unusual origin and inquired about its nature.",
+            "emotional_tone": "wary",
+            "significance": 1
+          }
+        }
+      },
+      "changes_applied": [
+        "Aldric the Merchant remembers: 'The stranger showed me a coin of unusual origin and inquired about its nature.' [wary, significance 1]"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {},
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [
+        "Aldric the Merchant"
+      ],
+      "npc_memories_present": false
+    },
+    {
+      "turn": 15,
+      "action": "go back to the tavern",
+      "narration": "You turn away from the merchant's stall and backtrack through the cooling night air of the market. You walk west along the cobblestone street until the familiar, weathered wood of the Broken Flagon Tavern looms before you in the darkness.",
+      "state_update": {
+        "move_player": [
+          "west",
+          "south"
+        ]
+      },
+      "changes_applied": [
+        "Player moved to Cobblestone Street",
+        "Player moved to The Broken Flagon Tavern"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {
+        "reflects_memory": false,
+        "confidence": 1.0,
+        "reason": "The narration describes the player's movement away from the market and does not feature Aldric the Merchant or any reaction from him."
+      },
+      "consistency_judgement": {
+        "is_consistent": false,
+        "confidence": 1.0,
+        "violation": "The narration describes moving west to the Broken Flagon Tavern, but the current location is the Market Square, and the only exit west is listed as 'Cobblestone Street', not a tavern."
+      },
+      "npcs_present": [
+        "Aldric the Merchant"
+      ],
+      "npc_memories_present": true
+    },
+    {
+      "turn": 16,
+      "action": "talk to Marta",
+      "narration": "You push open the heavy tavern door, the air inside thick with the familiar, stifling scent of smoke. Marta stands behind the bar, her knuckles white as she grips the handle of her club, her eyes narrowing into cold slits as soon as you step into the light. She does not offer a greeting, her silence vibrating with a hostility that has only sharpened since you last departed.",
+      "state_update": {
+        "npc_memory": {
+          "barkeep": {
+            "description": "The intruder has returned to the tavern, confirming he is brazen enough to confront me again after I've made my hostility clear.",
+            "emotional_tone": "wary",
+            "significance": 1
+          }
+        }
+      },
+      "changes_applied": [
+        "Marta the Barkeep remembers: 'The intruder has returned to the tavern, confirming he is brazen enough to confront me again after I've made my hostility clear.' [wary, significance 1]"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {
+        "reflects_memory": true,
+        "confidence": 1.0,
+        "reason": "Marta's physical reaction of white-knuckled gripping of her club and her cold, silent hostility directly aligns with the player's history of threats and dangerous behavior recorded in turns 5, 6, and 7."
+      },
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [
+        "Marta the Barkeep"
+      ],
+      "npc_memories_present": true
+    },
+    {
+      "turn": 17,
+      "action": "go upstairs to my room",
+      "narration": "You head toward the stairs, your boots thudding heavily against the floorboards. Marta watches your movement with a rigid, predatory focus, her grip tightening on the club beneath the bar as you retreat from her reach. You climb the narrow, creaking staircase, eager to put distance between yourself and her hostile stare.",
+      "state_update": {
+        "move_player": "upstairs"
+      },
+      "changes_applied": [
+        "Player moved to Room Twenty One"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {
+        "reflects_memory": true,
+        "confidence": 1.0,
+        "reason": "The narration explicitly mentions Marta's 'predatory focus' and her grip on a hidden club, which directly mirrors the memories of her perceiving the player as a dangerous, hostile threat."
+      },
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [
+        "Marta the Barkeep"
+      ],
+      "npc_memories_present": true
+    },
+    {
+      "turn": 18,
+      "action": "examine the locked chest",
+      "narration": "You kneel before the scarred wood of the locked chest, the air in the room stale and cold. You trace the iron keyhole with your thumb, feeling the faint, rhythmic creaking of the floorboards outside your door as the building settles into the night.",
+      "state_update": {
+        "add_fact": "The chest is secured with a complex, heavy-duty iron lock."
+      },
+      "changes_applied": [
+        "Fact learned: The chest is secured with a complex, heavy-duty iron lock."
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {},
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [],
+      "npc_memories_present": false
+    },
+    {
+      "turn": 19,
+      "action": "use the old iron key on the chest",
+      "narration": "You slide the Old Iron Key into the rusted lock, the mechanism resisting with a jagged, metallic grind. With a sharp twist, the bolt retracts, and the heavy lid groans open to reveal the contents tucked away in the shadows.",
+      "state_update": {
+        "add_fact": "The locked chest contains a folded parchment bearing a wax seal and a tarnished silver locket."
+      },
+      "changes_applied": [
+        "Fact learned: The locked chest contains a folded parchment bearing a wax seal and a tarnished silver locket."
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {},
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [],
+      "npc_memories_present": false
+    },
+    {
+      "turn": 20,
+      "action": "go south",
+      "narration": "You turn from the chest and head toward the door, your boots silent on the floorboards as you make your way down the creaking staircase. The low hum of the tavern greets you, though the air feels heavy with an unspoken tension as you reach the ground floor.",
+      "state_update": {
+        "move_player": "downstairs"
+      },
+      "changes_applied": [
+        "Player moved to The Broken Flagon Tavern"
+      ],
+      "rejected_transitions": [],
+      "memory_judgement": {},
+      "consistency_judgement": {
+        "is_consistent": true,
+        "confidence": 1.0,
+        "violation": ""
+      },
+      "npcs_present": [],
+      "npc_memories_present": false
+    }
+  ],
+  "rejection_examples": [
+    "REJECTED pickup dagger \u2014 not in current location"
+  ],
+  "memory_failures": [
+    {
+      "turn": 6,
+      "action": "ask Marta about the chest upstairs",
+      "narration": "Marta freezes mid-pour, the ale spilling slightly over the side of the mug as she hears your question. She slams the glass onto the counter with a heavy thud, her eyes narrowing into dangerous slits. 'Don't you go poking your nose into things that don't concern you, stranger,' she growls, pointedly glancing at your dagger before turning her back on you completely.",
+      "reason": "Judge call failed."
+    },
+    {
+      "turn": 15,
+      "action": "go back to the tavern",
+      "narration": "You turn away from the merchant's stall and backtrack through the cooling night air of the market. You walk west along the cobblestone street until the familiar, weathered wood of the Broken Flagon Tavern looms before you in the darkness.",
+      "reason": "The narration describes the player's movement away from the market and does not feature Aldric the Merchant or any reaction from him."
+    }
+  ],
+  "consistency_violations": [
+    {
+      "turn": 2,
+      "action": "examine the wanted notice on the wall",
+      "narration": "You approach the support beam, your boots crunching on sawdust. The wanted notice features a sketch of a man with a jagged scar across his cheek, but as Marta watches you, her grip on the iron club tightens, her eyes narrowed in a cold, silent assessment.",
+      "violation": "The narration introduces an 'iron club' held by Marta the Barkeep, which is not listed in the world state items or the NPC's equipment."
+    },
+    {
+      "turn": 8,
+      "action": "pick up the dagger",
+      "narration": "You reach for the dagger lying on the scarred table, your fingers closing around the cold, pitted iron. Marta watches your every movement, her iron club poised and heavy in the air, her face a mask of stone-cold defiance. The tavern remains suffocatingly silent as you secure the weapon at your hip.",
+      "violation": "The narration states the player reaches for a dagger 'lying on the scarred table', but the player's inventory already contains the Rusty Dagger [id:dagger] and it is not listed as an item at the current location."
+    },
+    {
+      "turn": 15,
+      "action": "go back to the tavern",
+      "narration": "You turn away from the merchant's stall and backtrack through the cooling night air of the market. You walk west along the cobblestone street until the familiar, weathered wood of the Broken Flagon Tavern looms before you in the darkness.",
+      "violation": "The narration describes moving west to the Broken Flagon Tavern, but the current location is the Market Square, and the only exit west is listed as 'Cobblestone Street', not a tavern."
+    }
+  ]
+}
