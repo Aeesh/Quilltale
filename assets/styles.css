@@ -276,10 +276,6 @@ footer, .footer, #footer { display: none !important; }
     gap: 0.9rem !important;
 }
 
-.qt-right-col {
-    min-height: 0 !important;
-}
-
 
 /* =============================================================
    Panel Labels
@@ -541,7 +537,7 @@ footer, .footer, #footer { display: none !important; }
     border-radius: var(--r) !important;
     color: var(--ink) !important;
     font-family: var(--font-body) !important;
-    font-size: 1.05rem !important;
+    font-size: 1rem !important;
     line-height: 1.6 !important;
     padding: 0.7rem 1.1rem !important;
     resize: none !important;
@@ -655,7 +651,7 @@ footer, .footer, #footer { display: none !important; }
     .gradio-container {
         padding: 0 1rem 3rem !important;
     }
-    .qt-main-row { flex-direction: column !important; }
+    .qt-left-col { min-width: 0 !important; }
     .qt-brand-name { font-size: 1.6rem !important; }
     .qt-chronicle { height: 380px !important; min-height: 380px !important; max-height: 380px !important; }
 }

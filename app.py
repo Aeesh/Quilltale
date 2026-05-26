@@ -172,7 +172,7 @@ with gr.Blocks(title="Quilltale") as demo:
                     label="",
                     scale=5,
                     lines=3,
-                    max_lines=5,
+                    max_lines=3,
                     elem_classes=["qt-action-box"],
                 )
                 submit_btn = gr.Button(
