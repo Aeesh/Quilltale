@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 class GeminiLLM(BaseLLM):
-    def __init__(self, model: str = "gemini-3.1-flash-lite-preview"):
+    def __init__(self, model: str = "gemini-3.1-flash-lite"):
         self._client = genai.Client(
             api_key=os.environ["GEMINI_API_KEY"]
         )
