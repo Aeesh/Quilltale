@@ -180,6 +180,7 @@ with gr.Blocks(title="Quilltale") as demo:
                     variant="primary",
                     scale=1,
                     min_width=50,
+                    interactive=False,
                     elem_classes=["qt-btn-act"],
                 )
 
@@ -211,16 +212,34 @@ with gr.Blocks(title="Quilltale") as demo:
     )
 
     submit_btn.click(
+        fn=lambda: (gr.update(interactive=False), gr.update(interactive=False)),
+        outputs=[submit_btn, action_input],
+    ).then(
         fn=take_action,
         inputs=[action_input, chatbot, world_state, scene_image],
         outputs=[chatbot, scene_image, world_state, world_state_display],
-    ).then(fn=lambda: "", outputs=[action_input])
+    ).then(
+        fn=lambda: ("", gr.update(interactive=True), gr.update(interactive=False)),
+        outputs=[action_input, action_input, submit_btn],
+    )
 
     action_input.submit(
+        fn=lambda: (gr.update(interactive=False), gr.update(interactive=False)),
+        outputs=[submit_btn, action_input],
+    ).then(
         fn=take_action,
         inputs=[action_input, chatbot, world_state, scene_image],
         outputs=[chatbot, scene_image, world_state, world_state_display],
-    ).then(fn=lambda: "", outputs=[action_input])
+    ).then(
+        fn=lambda: ("", gr.update(interactive=True), gr.update(interactive=False)),
+        outputs=[action_input, action_input, submit_btn],
+    )
+
+    action_input.change(
+        fn=lambda text: gr.update(interactive=bool(text.strip())),
+        inputs=[action_input],
+        outputs=[submit_btn],
+    )
 
     demo.load(
         fn=start_game,
