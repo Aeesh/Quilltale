@@ -6,8 +6,10 @@ Images are only generated when the game scene changes.
 
 import os
 import logging
+import requests
 from PIL import Image
 from huggingface_hub import InferenceClient
+from io import BytesIO
 
 logger = logging.getLogger(__name__)
 
@@ -40,4 +42,12 @@ def generate_scene_image(prompt: str) -> Image.Image | None:
         return image
     except Exception as e:
         logger.error(f"Image generation failed: {e}")
-        return None
+        logger.info("Falling back to Pollinations for image generation.")
+        try:
+            # fallback to Pollinations
+            url = f"https://image.pollinations.ai/prompt/{requests.utils.quote(full_prompt)}"
+            response = requests.get(url, timeout=60)
+            image = Image.open(BytesIO(response.content))
+            return image
+        except Exception:
+            return None

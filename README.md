@@ -113,7 +113,7 @@ The third pattern is judge miscalibration on movement turns. On turns where the 
 
 ## Scene generation
 
-Scene images are generated via the HuggingFace Inference API using FLUX.1-schnell, triggered only when the player moves to a new location, not on every turn. This keeps generation infrequent and the demo responsive. The image prompt is written by the GM as part of the same JSON response that updates world state, using the same structured output mechanism.
+Scene images are generated via the HuggingFace Inference API using FLUX.1-schnell( pollinations api as fallback), triggered only when the player moves to a new location, not on every turn. This keeps generation infrequent and the demo responsive. The image prompt is written by the GM as part of the same JSON response that updates world state, using the same structured output mechanism.
 
 On the HuggingFace free inference tier, generation occasionally fails with rate limit or payment errors when monthly credits are exhausted. The game handles this gracefully, failed generation returns None and the last scene image persists rather than crashing the session. Latency on successful calls is typically 8 to 15 seconds on the free CPU tier.
 
